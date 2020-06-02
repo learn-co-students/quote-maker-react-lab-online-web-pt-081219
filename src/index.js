@@ -6,6 +6,7 @@ import { createStore } from 'redux'
 import rootReducer from './reducers/index'
 
 let store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+//had to add the redux devtools here even though they are also referenced in store.js
 
 ReactDOM.render(
   <Provider store={store}>
