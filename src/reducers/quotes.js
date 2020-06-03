@@ -1,6 +1,4 @@
-import uuid from "uuid";
-
-const id = uuid();
+import Quotes from "../containers/Quotes";
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -13,23 +11,22 @@ export default (state = [], action) => {
       });
 
     case "UPVOTE_QUOTE":
-      for (let quote of state) {
+      return state.map((quote) => {
         if (quote.id === action.quoteId) {
-          quote.votes += 1;
+          return { ...quote, votes: quote.votes + 1 };
+        } else {
+          return quote;
         }
-      }
-      return state;
+      });
 
     case "DOWNVOTE_QUOTE":
-      for (let quote of state) {
-        if (quote.id === action.quoteId) {
-          if (quote.votes === 0) {
-          } else {
-            quote.votes -= 1;
-          }
+      return state.map((quote) => {
+        if (quote.id === action.quoteId && quote.votes !== 0) {
+          return { ...quote, votes: quote.votes - 1 };
+        } else {
+          return quote;
         }
-      }
-      return state;
+      });
 
     default:
       return state;
