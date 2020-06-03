@@ -33,3 +33,6 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, { removeQuote, upvoteQuote, downvoteQuote })(Quotes);
+// mapState allows passing quotes as prop on line 9 and { removeQuote, upvoteQuote, downvoteQuote }, which 
+// is essentially a work around for mapdispatch, allows removeQuote, upvoteQuote, downvoteQuote to be passed
+// as props also on line 9
