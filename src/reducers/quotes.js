@@ -1,5 +1,5 @@
 export default (state = [], action) => {
-  let idx;
+  let quoteId;
   let quote;
   switch (action.type) {
 
@@ -8,29 +8,29 @@ export default (state = [], action) => {
       return state.concat(action.quote);
 
     case "REMOVE_QUOTE":
-      console.log(action.id)
-      return state.filter(quote => quote.id !== action.id);
+      console.log(action.quoteId)
+      return state.filter(quote => quote.id !== action.quoteId);
 
     case 'UPVOTE_QUOTE':
-      console.log(action.id)
-      idx = state.findIndex(quote => quote.id === action.id);
-      quote = state[idx];
+      console.log(action.quoteId)
+      quoteId = state.findIndex(quote => quote.id === action.quoteId);
+      quote = state[quoteId];
 
       return [
-        ...state.slice(0, idx),
+        ...state.slice(0, quoteId),
         Object.assign({}, quote, { votes: quote.votes += 1 }),
-        ...state.slice(idx + 1)
+        ...state.slice(quoteId + 1)
       ];
 
     case 'DOWNVOTE_QUOTE':
-      console.log(action.id)
-      idx = state.findIndex(quote => quote.id === action.id);
-      quote = state[idx];
+      console.log(action.quoteId)
+      quoteId = state.findIndex(quote => quote.id === action.quoteId);
+      quote = state[quoteId];
       if (quote.votes > 0) {
         return [
-          ...state.slice(0, idx),
+          ...state.slice(0, quoteId),
           Object.assign({}, quote, { votes: quote.votes -= 1 }),
-          ...state.slice(idx + 1)
+          ...state.slice(quoteId + 1)
         ];
       }
       return state;  
