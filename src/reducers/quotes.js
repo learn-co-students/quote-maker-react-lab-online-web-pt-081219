@@ -1,5 +1,3 @@
-import Quotes from "../containers/Quotes";
-
 export default (state = [], action) => {
   switch (action.type) {
     case "ADD_QUOTE":
