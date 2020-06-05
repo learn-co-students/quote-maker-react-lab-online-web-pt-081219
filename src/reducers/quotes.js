@@ -10,7 +10,7 @@ export default (state = [], action) => {
                 id: action.quote.id,
                 content: action.quote.content,
                 author: action.quote.author,
-                votes: 0
+                votes: action.quote.votes
               }
               ]
     case 'REMOVE_QUOTE':
