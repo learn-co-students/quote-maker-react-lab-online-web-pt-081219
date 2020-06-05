@@ -4,6 +4,8 @@ import QuoteCard from '../components/QuoteCard';
 
 class Quotes extends Component {
 
+   
+
   render() {
     return (
       <div>
@@ -20,6 +22,16 @@ class Quotes extends Component {
 
                 Render Quotes With QuoteCard component and pass down callback props for removing, upvoting and downvoting quotes
                */}
+               
+               {
+                 this.props.quotes.map((quote) =>
+                    
+                  <QuoteCard props = {quote, 
+                                removeQuote: {this.props.removeQuote}, 
+                                upvoteQuote: {this.props.upvoteQuote}, 
+                                downvoteQuote: {this.props.downvoteQuote}} />
+                 )
+               }
             </div>
           </div>
         </div>
@@ -29,4 +41,23 @@ class Quotes extends Component {
 }
 
 //add arguments to connect as needed
-export default connect()(Quotes);
+
+const mapStateToProps = state => {
+  return { quotes: state.quotes }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+    removeQuote: (quoteId) => {
+      dispatch(removeQuote(quoteId))
+    },
+    upvoteQuote: (quoteId) => {
+      dispatch(upvoteQuote(quoteId))
+    },
+    downvoteQuote: (quoteId) => {
+      dispatch(downvoteQuote(quoteId))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quotes);
